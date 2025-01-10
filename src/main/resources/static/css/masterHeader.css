@@ -1,0 +1,96 @@
+@charset "utf-8";
+
+
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 100;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Thin.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 300;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Light.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 400;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 500;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Medium.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 700;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Bold.otf) format('opentype');}
+@font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype');}
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+a:link { color: black; }
+a:visited { color: black; }
+a:hover { color: #F28D8D; }
+a:active { color: #F28D8D; }
+a { text-decoration : none; cursor: hand; }
+
+.title {
+  font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #FF6B6B;
+  text-shadow: 2px 2px 0px #FFD93D;
+  letter-spacing: 2px;
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #4ECDC4, #45B7D1);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.title:hover {
+  transform: translateY(-5px) rotate(-2deg);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+.title::before {
+  content: '⌨️';
+  margin-right: 10px;
+  font-size: 0.8em;
+  vertical-align: middle;
+}
+
+.title::after {
+  content: '|';
+  margin-left: 5px;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0 }
+}
+
+
+.top_menu > a:hover { color: #F28D8D; font-weight: bold; }
+.top_menu > a:active { color: #F28D8D; font-weight: bold; }
+
+.top_menu {
+	
+	width: 90%;
+	height: 150px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	text-align: right;
+	align-items: top;
+	background-color: white;
+	padding: 10px;
+	z-index:1;
+}
+
+.main_shop {
+	width: 90%;
+	height: auto;
+	text-align: center;
+	padding-top:200px;
+	margin: auto;
+	position:relative;
+	background-color: white;
+	
+}
+
+.title_img {
+    max-width: 40%;
+    height: auto;
+    margin: auto;
+}

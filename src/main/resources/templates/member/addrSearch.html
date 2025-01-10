@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>주소 검색</title>
+
+<style>
+
+a { text-decoration-line: none; cursor: hand; }
+a:link { color: black; }
+a:visited { color: black; }
+a:hover { color: red; }
+a:active { color: red; }
+
+.tableDiv {
+	text-align: center;
+}
+
+.InfoTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 700px;  
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(255, 108, 108, 0.1);
+
+}  
+.InfoTable th {
+    background-color: #FF6C6C;
+    color: white;
+    text-align: left;
+    padding: 15px;
+}
+
+.InfoTable th, .InfoTable td {
+    padding: 12px;
+    border-bottom: 1px solid #FFE4E1;
+}
+
+.InfoTable tr:last-child td {
+    border-bottom: none;
+}
+
+.InfoTable caption {caption-side: top; }
+
+
+</style>
+
+<script>
+
+	const addrCheck = (zipcode, addr1, addr2,addr3) => {
+		
+		window.opener.document.getElementById("zip").value = zipcode;
+		window.opener.document.getElementById("addr1").value = addr1 + addr2 + addr3;
+		window.close();
+		
+	}
+
+</script>
+
+</head>
+<body>
+
+<div class="tableDiv">
+
+	<h1>주소 검색</h1>
+	<table class="InfoTable">
+  		<tr>
+   			<th>우편번호</th>
+   			<th>주소</th>
+   			<th>선택</th>
+  		</tr>
+
+ 		<tbody>
+ 		<th:block th:if="${list != null}">
+		 	<tr th:each="list:${list} "onMouseover="this.style.background='#FFE4E1';" onmouseout="this.style.background='white';">
+				<td>[[${list.zipcode}]]</td>
+				<td style="text-align:left;">[[${list.province}]][[${list.road}]][[${list.building}]]<br>[[${list.oldaddr}]]</td>  
+				<td><input type="button" th:value="선택" th:onclick="addrCheck([[${list.zipcode}]],[[${list.province}]],[[${list.road}]],[[${list.building}]])"></td>
+			</tr>
+		</th:blockif>	
+		<th:block th:if="${list == null}">
+			<tr>
+				<td colspan="3">검색된 주소가 없습니다.</td>
+			</tr>
+		</th:block>
+
+		</tbody>
+	</table>
+
+	<div>
+		[(${pageListView})]
+	</div>
+</div>
+</body>
+</html>

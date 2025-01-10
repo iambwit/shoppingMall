@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+<link rel="stylesheet" type="text/css" href="/css/shopHeader.css">
+
+<style>
+
+.mall {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.top_menu {
+    padding: 10px;
+}
+
+.main_shop {
+    margin-top: 20px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+.keyword {
+    width: 70%;
+    height: 40px;
+    border: 2px solid #FF6C6C;
+    border-radius: 20px 0 0 20px;
+    padding: 0 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.btn_search {
+    width: 100px;
+    height: 44px;
+    background: #FF6C6C;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn_search:hover {
+    background-color: #F7A5A5;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-item {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #FF6C6C;
+}
+
+.product-manufacturer {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.pagination a, .pagination span {
+    color: #FF6C6C;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #FF6C6C;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #F7A5A5;
+    color: white;
+}
+
+.pagination .active {
+    background-color: #FF6C6C;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+</style>
+
+
+<script>
+	const p_search = () => {
+		
+		var keyword =  document.getElementById('keyword').value;
+		location.href = '/master/main?page=1&keyword=' + keyword;
+	}
+	
+	//키보드 엔터 누르면 상품 검색 함수 실행
+	const press = () => {
+		if(event.keyCode == 13) p_search(); 
+	}
+	
+</script>
+
+<script src="/js/logout.js"></script>
+
+
+</head>
+<body>
+
+<div class="mall">
+    <div class="top_menu">
+        <th:block th:replace="~{layout/shopHeader::header}"></th:block>
+    </div>
+    
+    <div class="main_shop">
+        <div class="search-container">
+            <input type="text" id="keyword" class="keyword" name="keyword" onkeydown="press()" placeholder="상품명 또는 제조사를 입력하여 검색하세요.">
+            <button type="button" class="btn_search" onclick="p_search()">검색</button>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-item" th:each="list : ${list}">
+                <img class="product-image" th:src="@{'/p_img/' + ${list.p_stored_image}}" alt="상품 이미지">
+                <div class="product-info">
+                    <div class="product-name">
+                        <a th:href="@{'/shop/pView?p_id=' + ${list.p_id} + '&page=' + ${page} + '&keyword=' + ${keyword} }"
+                           th:text="${list.p_name}"></a>
+                    </div>
+                    <div class="product-manufacturer" th:text="${list.p_manufacturer}"></div>
+                    <div class="product-price" th:text="${#numbers.formatInteger(list.p_price,3,'COMMA')+'원'}"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pagination" th:if="${pageListView}">
+		    <th:block th:utext="${pageListView}"></th:block>
+		</div>
+
+    </div>
+</div>
+
+</body>
+</html>

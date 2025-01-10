@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>쇼핑몰</title>
+<script>
+
+
+</script>
+</head>
+<body>
+<script>
+	
+	const getCookie = (name) => {
+		  let matches = document.cookie.match(new RegExp(
+		    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+		  ));
+		  return matches ? decodeURIComponent(matches[1]) : undefined;
+	}
+	//alert("authkey = " + getCookie('authkey'));
+	//자동 로그인 처리
+	if(getCookie('authkey') !== undefined){
+		
+		let formData = new FormData();
+		formData.append("authkey",getCookie('authkey'));
+		fetch('/member/login?autologin=Y',{
+			method : 'POST',
+			body : formData
+		}).then((response) => response.json())
+		  .then((data) => {
+			 if(data.message == 'good'){
+				 //if(data.role === 'USER')
+				 	//window.location.href='/shop/main?page=1';
+				 //else 
+					//window.location.href='/master/main?page=1';
+			} else {
+				alert("시스템 장애로 자동 로그인이 실패 했습니다.");		 
+			}		  
+	    }).catch((error)=> { console.log("error = " + error);} );
+	}
+	
+	
+	let role = '[[${session.role}]]';
+	if(role === 'MASTER') 
+		window.location.href="/master/main?page=1";
+	else
+		window.location.href="/shop/main?page=1";
+
+</script>
+</body>
+</html>
+
